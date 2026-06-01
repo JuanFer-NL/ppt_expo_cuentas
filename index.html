@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pobreza — Enfoques y Métodos · Grupo 13</title>
+
+  <!-- Reveal.js CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(','\\)']],
+        displayMath: [['\\[','\\]']],
+        tags: 'none'
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre']
+      },
+      startup: {
+        ready() {
+          MathJax.startup.defaultReady();
+        }
+      }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────── */
+    :root {
+      --bg:        #F4EFE8;
+      --bg-dark:   #1A1A2E;
+      --ink:       #1C2340;
+      --ink-light: #4A5068;
+      --cream:     #EDE8DF;
+      --accent:    #C0392B;
+      --accent2:   #2980B9;
+      --gold:      #B8860B;
+      --white:     #FAFAF7;
+
+      --f-display: 'Playfair Display', Georgia, serif;
+      --f-body:    'DM Sans', sans-serif;
+      --f-mono:    'DM Mono', monospace;
+    }
+
+    /* ─── GLOBAL ─────────────────────────────────────────── */
+    .reveal {
+      font-family: var(--f-body);
+      font-size: 22px;
+      color: var(--ink);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    /* remove default bottom shadow */
+    .reveal .progress { height: 3px; color: var(--accent); }
+    .reveal .controls { color: var(--accent); }
+
+    /* ─── SLIDE BASE ─────────────────────────────────────── */
+    .reveal section {
+      padding: 3rem 4rem;
+      box-sizing: border-box;
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────────────── */
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: var(--f-display);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-transform: none;
+      line-height: 1.1;
+      margin: 0 0 .6em;
+    }
+    .reveal h1 { font-size: 3.2em; font-weight: 900; }
+    .reveal h2 { font-size: 2em; }
+    .reveal h3 { font-size: 1.3em; color: var(--accent); }
+    .reveal p  { font-size: .82em; line-height: 1.75; color: var(--ink-light); margin: 0 0 .8em; }
+    .reveal ul, .reveal ol { font-size: .8em; line-height: 1.8; color: var(--ink-light); padding-left: 1.2em; }
+    .reveal li { margin-bottom: .35em; }
+    .reveal strong { color: var(--ink); }
+    .reveal em { color: var(--accent); font-style: normal; }
+
+    /* ─── SLIDE VARIANTS ─────────────────────────────────── */
+
+    /* COVER */
+    .slide-cover {
+      background: var(--ink) !important;
+      color: var(--white) !important;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 120%, rgba(192,57,43,.35) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 10% -10%, rgba(41,128,185,.2) 0%, transparent 60%);
+    }
+    .slide-cover .cover-group { font-family: var(--f-mono); font-size: .65em; color: rgba(255,255,255,.4); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.4em; }
+    .slide-cover h1 { color: #fff; font-size: 4em; line-height: 1; margin-bottom: .15em; }
+    .slide-cover .subtitle { font-family: var(--f-mono); font-size: .72em; color: rgba(255,255,255,.55); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2em; }
+    .slide-cover .authors { display: flex; flex-direction: column; gap: .3em; }
+    .slide-cover .authors span { font-size: .68em; color: rgba(255,255,255,.7); letter-spacing: .03em; }
+    .slide-cover .deco-line { width: 60px; height: 2px; background: var(--accent); margin: 1.2em 0; }
+
+    /* SECTION HEADER */
+    .slide-section {
+      background: var(--cream) !important;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .slide-section .section-num {
+      font-family: var(--f-mono);
+      font-size: .6em;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: .5em;
+    }
+    .slide-section h2 { font-size: 2.6em; color: var(--ink); }
+    .slide-section .section-desc { font-size: .8em; color: var(--ink-light); max-width: 520px; border-left: 3px solid var(--accent); padding-left: 1em; }
+
+    /* CONTENT — light */
+    .slide-light { background: var(--white) !important; }
+
+    /* CONTENT — dark */
+    .slide-dark {
+      background: var(--bg-dark) !important;
+      color: var(--white) !important;
+    }
+    .slide-dark h2 { color: #fff; }
+    .slide-dark h3 { color: #7EC8E3; }
+    .slide-dark p, .slide-dark li { color: rgba(255,255,255,.72); }
+    .slide-dark strong { color: #fff; }
+
+    /* ACCENT STRIP */
+    .slide-accent {
+      background: var(--accent) !important;
+    }
+    .slide-accent h2, .slide-accent h3, .slide-accent p, .slide-accent li { color: #fff !important; }
+    .slide-accent strong { color: #fff; text-decoration: underline; }
+
+    /* ─── LAYOUT HELPERS ─────────────────────────────────── */
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2em; align-items: start; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.4em; align-items: start; }
+
+    .card {
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 4px;
+      padding: 1.1em 1.3em;
+      position: relative;
+    }
+    .card-dark {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 4px;
+      padding: 1.1em 1.3em;
+    }
+    .card .card-label {
+      font-family: var(--f-mono);
+      font-size: .55em;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .5em;
+    }
+    .card-dark .card-label { color: #7EC8E3; }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--f-mono);
+      font-size: .55em;
+      padding: .2em .7em;
+      border-radius: 2px;
+      background: var(--ink);
+      color: #fff;
+      margin-right: .3em;
+      margin-bottom: .3em;
+      letter-spacing: .06em;
+    }
+    .tag-red   { background: var(--accent); }
+    .tag-blue  { background: var(--accent2); }
+    .tag-gold  { background: var(--gold); }
+
+    .formula-box {
+      background: var(--cream);
+      border-left: 4px solid var(--accent);
+      padding: .9em 1.4em;
+      font-family: var(--f-mono);
+      font-size: .78em;
+      color: var(--ink);
+      border-radius: 0 4px 4px 0;
+      margin: .8em 0;
+    }
+    .formula-box.dark {
+      background: rgba(255,255,255,.07);
+      border-left-color: #7EC8E3;
+      color: rgba(255,255,255,.85);
+    }
+
+    .highlight-number {
+      font-family: var(--f-display);
+      font-size: 2.8em;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+
+    .pro-con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
+    .pro-box { background: rgba(41,174,97,.1); border: 1px solid rgba(41,174,97,.3); border-radius: 4px; padding: 1em 1.2em; }
+    .con-box { background: rgba(192,57,43,.08); border: 1px solid rgba(192,57,43,.25); border-radius: 4px; padding: 1em 1.2em; }
+    .pro-box h4 { color: #27AE60 !important; font-size: .85em; margin-bottom: .5em; }
+    .con-box h4 { color: var(--accent) !important; font-size: .85em; margin-bottom: .5em; }
+    .pro-box li, .con-box li { font-size: .72em; }
+
+    /* ─── IFRAME SLIDE ───────────────────────────────────── */
+    .iframe-container {
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.25);
+    }
+    .iframe-label {
+      font-family: var(--f-mono);
+      font-size: .55em;
+      color: var(--accent2);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: .6em;
+    }
+
+    /* ─── TIMELINE ───────────────────────────────────────── */
+    .timeline { display: flex; gap: 0; align-items: stretch; margin-top: 1em; }
+    .tl-item { flex: 1; padding: .8em 1em; position: relative; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      top: 1.4em;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--ink);
+      opacity: .15;
+    }
+    .tl-item:first-child::before { left: 50%; }
+    .tl-item:last-child::before  { right: 50%; }
+    .tl-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      margin: 0 auto .6em;
+      position: relative; z-index: 1;
+    }
+    .tl-year {
+      font-family: var(--f-mono);
+      font-size: .55em;
+      color: var(--accent);
+      text-align: center;
+      letter-spacing: .1em;
+      display: block;
+      margin-bottom: .3em;
+    }
+    .tl-text { font-size: .62em; text-align: center; color: var(--ink-light); line-height: 1.5; }
+
+    /* ─── FRAGMENT TWEAKS ────────────────────────────────── */
+    .reveal .fragment { transition: opacity .4s ease, transform .4s ease; }
+    .reveal .fragment.fade-up { transform: translateY(20px); }
+    .reveal .fragment.visible { transform: translateY(0); }
+
+    /* ─── SLIDE NUMBER ───────────────────────────────────── */
+    .reveal .slide-number {
+      font-family: var(--f-mono);
+      font-size: .55em;
+      background: transparent;
+      color: rgba(0,0,0,.3);
+      right: 1.5em;
+      bottom: 1em;
+    }
+    .slide-dark .reveal .slide-number { color: rgba(255,255,255,.3); }
+
+    /* ─── SCROLLABLE CONTENT ─────────────────────────────── */
+    .scroll-content {
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: .5em;
+    }
+    .scroll-content::-webkit-scrollbar { width: 4px; }
+    .scroll-content::-webkit-scrollbar-track { background: transparent; }
+    .scroll-content::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+  </style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- ══════════════════════════════════════════════════════
+       1 · PORTADA
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-cover" data-transition="fade">
+    <div style="position:relative;z-index:2;">
+      <div class="cover-group">Grupo 13 · Expo Cuentas 2026</div>
+      <h1>Pobreza</h1>
+      <div class="subtitle">Enfoques y Métodos para su Medición y Análisis</div>
+      <div class="deco-line"></div>
+      <div class="authors">
+        <span>Masia Insaurralde, Constantino Leonardo</span>
+        <span>Fernández Lancelle, Juan Nicolás</span>
+        <span>Jouliá, Mateo</span>
+        <span>Walter, Julián Alexander</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       2 · ÍNDICE
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Estructura de la presentación</h2>
+    <div class="cols-2" style="margin-top:1.2em;">
+      <div>
+        <div class="card fragment fade-up">
+          <div class="card-label">01</div>
+          <strong>Introducción</strong>
+          <p>Premisa subjetiva de la pobreza y objetivos del estudio.</p>
+        </div>
+        <div class="card fragment fade-up" style="margin-top:.8em;">
+          <div class="card-label">02</div>
+          <strong>Método Objetivo — Línea de Pobreza</strong>
+          <p>CBA, Adulto Equivalente, LP e indigencia.</p>
+        </div>
+        <div class="card fragment fade-up" style="margin-top:.8em;">
+          <div class="card-label">03</div>
+          <strong>Método Subjetivo — Concepto</strong>
+          <p>Autopercepción, componente relativo y escuela de Leyden.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card fragment fade-up">
+          <div class="card-label">04</div>
+          <strong>Metodología LPS</strong>
+          <p>Regresión MCO, parámetros y umbral de pobreza subjetiva.</p>
+        </div>
+        <div class="card fragment fade-up" style="margin-top:.8em;">
+          <div class="card-label">05</div>
+          <strong>Encuesta MIQ</strong>
+          <p>Prueba piloto interactiva y espacio 3D de resultados.</p>
+        </div>
+        <div class="card fragment fade-up" style="margin-top:.8em;">
+          <div class="card-label">06</div>
+          <strong>Actividad Interactiva & Conclusiones</strong>
+          <p>Simulación LPS con datos EPH 2025.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       3 · SECCIÓN 01 — INTRODUCCIÓN
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-section" data-transition="convex">
+    <div class="section-num">01 · Introducción</div>
+    <h2>¿Qué es la pobreza?</h2>
+    <p class="section-desc">
+      Una percepción <em>subjetiva</em> cuya definición varía según las expectativas
+      y el contexto socioeconómico de cada individuo.
+    </p>
+  </section>
+
+  <!-- ─── 3.1 Premisa ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Premisa del estudio</h2>
+    <p>La pobreza no es un hecho unívoco: conviven al menos dos grandes enfoques.</p>
+    <div class="cols-2" style="margin-top:1.2em;">
+      <div class="card fragment fade-up">
+        <div class="card-label">Pobreza Objetiva</div>
+        <p>Criterios externos: ingresos vs. canastas de consumo normativas, determinadas por
+        organismos como la FAO/OMS y ajustadas por el IPC.</p>
+        <span class="tag tag-red">Método del Ingreso</span>
+        <span class="tag">LP / LI</span>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">Pobreza Subjetiva</div>
+        <p>Autopercepción del bienestar material. <strong>"Las personas son los mejores jueces
+        de su propia situación."</strong> Incluye un componente relativo.</p>
+        <span class="tag tag-blue">MIQ / IEQ</span>
+        <span class="tag">LPS · LPL</span>
+      </div>
+    </div>
+    <p class="fragment fade-up" style="margin-top:1.2em; border-left:3px solid var(--accent); padding-left:.9em;">
+      Este trabajo prioriza la <strong>pobreza subjetiva</strong> a través de la
+      <strong>Línea de Pobreza Subjetiva (LPS)</strong>, sin dejar de examinar las
+      limitaciones del método objetivo en contextos de alta inflación y subdeclaración.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       4 · SECCIÓN 02 — MÉTODO OBJETIVO
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-section" data-transition="convex">
+    <div class="section-num">02 · Método Objetivo</div>
+    <h2>Línea de Pobreza</h2>
+    <p class="section-desc">
+      Determinación de hogares en situación de privación basándose en si sus ingresos
+      alcanzan los umbrales de la CBA.
+    </p>
+  </section>
+
+  <!-- ─── 4.1 CBA y Adulto Equivalente ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Canasta Básica Alimentaria</h2>
+    <div class="cols-2">
+      <div>
+        <p>La <strong>CBA</strong> se diseña considerando necesidades calóricas y proteicas
+        por sexo, edad y nivel de actividad según parámetros de la <em>FAO/OMS</em>.</p>
+        <div class="card" style="margin-top:.8em;">
+          <div class="card-label">Adulto Equivalente (AE)</div>
+          <p>Hombre de 30–60 años con actividad física moderada. Sirve como unidad base
+          para ponderar las necesidades de cada hogar.</p>
+        </div>
+        <div class="formula-box fragment fade-up" style="margin-top:.8em;">
+          \[\mathrm{LI} = \mathrm{CBA}_{\mathrm{AE}} \times \text{unidades de consumo del hogar}\]
+        </div>
+      </div>
+      <div class="fragment fade-up">
+        <div class="card">
+          <div class="card-label">Línea de Indigencia (LI)</div>
+          <p>Si los ingresos totales \(&lt;\) LI del hogar → hogar <strong>indigente</strong>.</p>
+        </div>
+        <div class="card" style="margin-top:.8em;">
+          <div class="card-label">Línea de Pobreza (LP)</div>
+          <p>\(\mathrm{LP} = \mathrm{LI} \,/\, \text{coef. de Engel}\)<br>
+          Si ingresos totales \(&lt;\) LP → hogar <strong>pobre</strong>.</p>
+        </div>
+        <p style="font-size:.68em; margin-top:.8em; color:var(--ink-light);">
+          El ajuste por inflación se realiza mediante el <strong>IPC</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 4.2 Limitaciones ─── -->
+  <section class="slide-dark" data-transition="slide">
+    <h2>Limitaciones del método objetivo</h2>
+    <div class="cols-3" style="margin-top:1.2em;">
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Inflación</div>
+        <p>El IPC puede no capturar fielmente el alza de precios en contextos
+        de alta volatilidad como Argentina.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Subdeclaración</div>
+        <p>Los ingresos reportados en encuestas suelen estar subestimados,
+        especialmente en hogares de altos recursos.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Foco en ingresos</div>
+        <p>Ignora patrimonio, ahorro, acceso a bienes públicos (salud,
+        educación) y nivel de endeudamiento.</p>
+      </div>
+    </div>
+    <p class="fragment fade-up" style="margin-top:1.4em; color:rgba(255,255,255,.6);">
+      Aunque se denomina "objetivo", requiere <strong style="color:#fff;">múltiples decisiones subjetivas</strong>:
+      qué bienes incluir en la canasta, cómo definir el adulto equivalente, etc.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       5 · SECCIÓN 03 — MÉTODO SUBJETIVO
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-section" data-transition="convex">
+    <div class="section-num">03 · Método Subjetivo</div>
+    <h2>Pobreza Subjetiva</h2>
+    <p class="section-desc">
+      La valoración de la pobreza depende también de la comparación con el nivel
+      de vida de otros — componente relativo.
+    </p>
+  </section>
+
+  <!-- ─── 5.1 Escuela de Leyden ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Origen: escuela de Leyden</h2>
+    <div class="timeline">
+      <div class="tl-item fragment fade-up">
+        <div class="tl-dot"></div>
+        <span class="tl-year">1968</span>
+        <div class="tl-text">Van Praag publica las primeras funciones de bienestar individual del ingreso — Leiden University.</div>
+      </div>
+      <div class="tl-item fragment fade-up">
+        <div class="tl-dot"></div>
+        <span class="tl-year">1973</span>
+        <div class="tl-text">Van Praag &amp; Kapteyn: evidencia adicional sobre bienestar e ingresos — European Economic Review.</div>
+      </div>
+      <div class="tl-item fragment fade-up">
+        <div class="tl-dot"></div>
+        <span class="tl-year">1977</span>
+        <div class="tl-text">Goedhart, Halberstadt, Kapteyn &amp; Van Praag formalizan la <strong>LPS</strong> en el Journal of Human Resources.</div>
+      </div>
+      <div class="tl-item fragment fade-up">
+        <div class="tl-dot"></div>
+        <span class="tl-year">1979</span>
+        <div class="tl-text">Kapteyn: "Una teoría de la formación de preferencias" — Leiden University.</div>
+      </div>
+    </div>
+    <p class="fragment fade-up" style="margin-top:1.2em;">
+      Las herramientas clave: <strong>MIQ</strong> (Minimum Income Question) e
+      <strong>IEQ</strong> (Income Evaluation Question).
+    </p>
+  </section>
+
+  <!-- ─── 5.2 Cuatro métodos subjetivos ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Métodos de medición subjetiva</h2>
+    <div class="cols-2" style="margin-top:.8em;">
+      <div class="card fragment fade-up">
+        <div class="card-label">1 · LPS — Línea de Pobreza Subjetiva</div>
+        <p>Se pregunta el ingreso mínimo (MIQ). Con las respuestas se estima una regresión;
+        la intersección con la bisectriz define la línea. <em>Foco de este trabajo.</em></p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">2 · LPL — Línea de Leyden</div>
+        <p>Escala IEQ del 1 al 5 (muy mala → muy buena). Se determina una función de
+        bienestar del ingreso para cada nivel declarado.</p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">3 · Pobreza declarada</div>
+        <p>Pregunta directa: ¿se considera usted pobre? Captura autopercepción sin
+        cálculos adicionales.</p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">4 · Pobreza consensual</div>
+        <p>Se releva qué ingreso mínimo o qué características estructurales debe poseer
+        un hogar para no ser considerado pobre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CASOS LATINOAMÉRICA (movido desde sección 9)
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-dark" data-transition="slide">
+    <h2>Casos aplicados en Latinoamérica</h2>
+    <p style="color:rgba(255,255,255,.5); font-size:.72em; margin-bottom:1em;">
+      Reducida — pero valiosa — literatura regional desde los 70.
+    </p>
+    <div class="cols-2">
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Colombia · 2006</div>
+        <p>Aguado &amp; Osorio (UAB): <em>"Percepción subjetiva de los pobres: una alternativa a la medición de la pobreza."</em></p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Argentina · 2006 (1)</div>
+        <p>Lucchetti (CEDLAS): caracterización del bienestar y cálculo de la LPS en Argentina.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Argentina · 2006 (2)</div>
+        <p>Giarrizzo (FCE-UBA): indicadores de pobreza subjetiva para aproximarse al bienestar de la población.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Uruguay · 2021</div>
+        <p>Scalese (FCEA-URU): primera aproximación a la pobreza subjetiva para el caso uruguayo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       6 · SECCIÓN 04 — METODOLOGÍA LPS
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-section" data-transition="convex">
+    <div class="section-num">04 · Metodología LPS</div>
+    <h2>Construcción de la línea de pobreza subjetiva</h2>
+    <p class="section-desc">
+      Regresión MCO en logaritmos + supuesto de racionalidad en equilibrio.
+    </p>
+  </section>
+
+  <!-- ─── 6.1 MIQ y sesgo ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>La MIQ y el sesgo de ingresos</h2>
+    <div class="cols-2">
+      <div>
+        <p>La pregunta central es:</p>
+        <div class="formula-box">
+          ¿Cuál es el ingreso mínimo mensual que usted estima necesario para satisfacer
+          las necesidades básicas del hogar?
+        </div>
+        <p style="margin-top:.8em;">La respuesta — \(y_{\min}\) — depende fuertemente del ingreso actual del hogar:</p>
+        <ul>
+          <li class="fragment fade-up"><strong>Ingresos altos</strong> → declaran \(y_{\min}\) elevado (sesgo hacia arriba).</li>
+          <li class="fragment fade-up"><strong>Ingresos bajos</strong> → declaran \(y_{\min}\) bajo (expectativas adaptadas).</li>
+        </ul>
+      </div>
+      <div class="fragment fade-up">
+        <div class="card">
+          <div class="card-label">Supuesto de racionalidad en equilibrio</div>
+          <p>La estimación de \(y_{\min}\) es libre de sesgos <em>únicamente</em> cuando el
+          ingreso actual del hogar <strong>coincide exactamente</strong> con el monto
+          declarado como mínimo.</p>
+          <div class="formula-box" style="margin-top:.7em; font-size:.85em;">
+            Condición: \(y = y_{\min}\)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 6.2 Ecuación de regresión ─── -->
+  <section class="slide-dark" data-transition="slide">
+    <h2>Regresión lineal multivariable — MCO</h2>
+    <p>Siguiendo a Goedhart et al. (1977), se usa la forma log-lineal:</p>
+    <div class="formula-box dark fragment fade-up">
+      \[\ln y_{\min,i} = \alpha_0 + \alpha_1 \cdot \ln y_i + \alpha_2 \cdot \ln f_s + u_i\]
+    </div>
+    <div class="cols-3" style="margin-top:1.2em;">
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">\(\alpha_0\)</div>
+        <p>Nivel base de las aspiraciones monetarias del individuo.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">\(\alpha_1\) — Preference drift</div>
+        <p>Elasticidad del ingreso mínimo respecto al ingreso actual. Velocidad de adaptación al nivel de vida.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">\(\alpha_2\) — Economías de escala</div>
+        <p>Elasticidad respecto al tamaño familiar. \(\alpha_2 \to 0\) implica economías de escala perfectas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 6.3 Umbral y fórmula ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Umbral de pobreza subjetiva</h2>
+    <p>Se obtiene igualando la ecuación de regresión con la bisectriz \(y_{\min} = y\),
+    y despejando \(y_{\min}^*\):</p>
+    <div class="formula-box fragment fade-up" style="font-size:.95em; text-align:center; padding:1.2em 2em;">
+      \[y_{\min}^*(f_s) = \exp\!\left[\frac{\alpha_0 + \alpha_2 \cdot \ln f_s}{1 - \alpha_1}\right]\]
+    </div>
+    <div class="cols-2" style="margin-top:1.2em;">
+      <div class="fragment fade-up">
+        <p>Se obtienen <strong>múltiples líneas de pobreza</strong>, una por composición familiar.</p>
+        <p>El punto de corte es donde el hogar tiene una <em>percepción realista</em> del ingreso
+        mínimo de subsistencia, sin sesgos extremos.</p>
+      </div>
+      <div class="fragment fade-up" style="display:flex; align-items:center; justify-content:center;">
+        <img src="Figure_1.png" alt="Gráfico — Línea de pobreza subjetiva" style="max-width:100%; max-height:260px; object-fit:contain; border-radius:4px;" />
+      </div>
+    </div>
+    <p style="font-size:.6em; color:var(--ink-light); margin-top:.3em;">Gráfico 1 — Línea de pobreza subjetiva · Fuente: Kapteyn et al. (1988)</p>
+  </section>
+
+  <!-- ─── 6.4 Pros y contras ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Pros y contras de ambos métodos</h2>
+    <div class="cols-2" style="margin-top:.8em;">
+      <div>
+        <h3 style="font-size:.85em;">Método Objetivo</h3>
+        <div class="pro-con-grid">
+          <div class="pro-box fragment fade-up">
+            <h4>✔ Pros</h4>
+            <ul>
+              <li>Comparabilidad temporal y regional</li>
+              <li>Transparencia metodológica (FAO/OMS)</li>
+            </ul>
+          </div>
+          <div class="con-box fragment fade-up">
+            <h4>✘ Contras</h4>
+            <ul>
+              <li>Decisiones subjetivas implícitas</li>
+              <li>Ignora patrimonio y bienes públicos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:.85em;">Método Subjetivo</h3>
+        <div class="pro-con-grid">
+          <div class="pro-box fragment fade-up">
+            <h4>✔ Pros</h4>
+            <ul>
+              <li>Ajuste automático por costo regional</li>
+              <li>Centrado en los propios consumidores</li>
+            </ul>
+          </div>
+          <div class="con-box fragment fade-up">
+            <h4>✘ Contras</h4>
+            <ul>
+              <li>Supuesto de racionalidad perfecta</li>
+              <li>Correlación positiva ingreso–\(y_{\min}\)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       7 · SECCIÓN 05 — ENCUESTA MIQ
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-section" data-transition="convex">
+    <div class="section-num">05 · Encuesta MIQ</div>
+    <h2>Prueba piloto</h2>
+    <p class="section-desc">
+      Simulación de la LPS basada en el enfoque de la escuela de Leyden,
+      aplicada a participantes reales.
+    </p>
+    <div style="display:flex; align-items:center; gap:2.5em; margin-top:2em;">
+      <a href="https://forms.gle/NsNs6tpdTUojbuTu8" target="_blank" rel="noopener"
+         style="
+           display: inline-block;
+           padding: .85em 2.4em;
+           background: var(--accent);
+           color: #fff;
+           font-family: var(--f-body);
+           font-size: .95em;
+           font-weight: 500;
+           letter-spacing: .04em;
+           text-decoration: none;
+           border-radius: 4px;
+           box-shadow: 0 4px 18px rgba(192,57,43,.35);
+           transition: background .2s, box-shadow .2s;
+         "
+         onmouseover="this.style.background='#a93226'; this.style.boxShadow='0 6px 24px rgba(192,57,43,.5)'"
+         onmouseout="this.style.background='var(--accent)'; this.style.boxShadow='0 4px 18px rgba(192,57,43,.35)'"
+      >
+        Encuesta MIQ
+      </a>
+      <div style="text-align:center;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fforms.gle%2FNsNs6tpdTUojbuTu8&color=1C2340&bgcolor=F4EFE8"
+             alt="QR Encuesta MIQ"
+             style="display:block; width:220px; height:220px; border-radius:4px; border: 3px solid rgba(28,35,64,.12);" />
+        <span style="font-family:var(--f-mono); font-size:.5em; color:rgba(28,35,64,.45); letter-spacing:.1em; text-transform:uppercase; margin-top:.4em; display:block;">Escanear para responder</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 7.1 Diseño de la encuesta ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Diseño de la encuesta MIQ</h2>
+    <p>Tres preguntas clave para alimentar el modelo:</p>
+    <div class="cols-3" style="margin-top:1em;">
+      <div class="card fragment fade-up">
+        <div class="card-label">Pregunta 1 — \(y_{\min}\)</div>
+        <p><em>"¿Cuál es el ingreso familiar estimado que considera necesario para no endeudarse?"</em></p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">Pregunta 2 — \(y\)</div>
+        <p><em>"¿Cuáles son sus ingresos familiares estimados?"</em></p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">Pregunta 3 — \(f_s\)</div>
+        <p><em>"¿Cuántas personas viven con usted?"</em></p>
+      </div>
+    </div>
+    <div class="fragment fade-up" style="margin-top:1.2em; border-left:3px solid var(--accent2); padding-left:1em;">
+      <p><strong>Objetivo:</strong> comparar la LPS de nuestra encuesta con la LPS calculada
+      con datos de la <strong>EPH</strong> y con la línea de pobreza objetiva del <strong>INDEC</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ─── 7.2 ESPACIO 3D (iframe espacio3d.html) ─── -->
+  <section class="slide-light" data-transition="zoom" data-background="#F4EFE8">
+    <div style="margin-bottom:.5em;">
+      <div class="iframe-label">Visualización interactiva · Resultados de la encuesta MIQ</div>
+      <h2 style="font-size:1.4em; margin-bottom:.4em;">Espacio 3D — Distribución de respuestas</h2>
+    </div>
+    <iframe
+      class="iframe-container"
+      src="espacio3d.html"
+      title="Espacio 3D — Encuesta MIQ"
+      loading="lazy"
+      sandbox="allow-scripts allow-same-origin"
+    ></iframe>
+    <p style="font-size:.6em; color:var(--ink-light); margin-top:.5em;">
+      Cada punto representa un hogar encuestado. Ejes: ingreso real \((y)\), ingreso mínimo declarado \((y_{\min})\)
+      y tamaño familiar \((f_s)\). La intersección marca la LPS estimada.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       8 · SECCIÓN 06 — ACTIVIDAD INTERACTIVA
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-section" data-transition="convex">
+    <div class="section-num">06 · Actividad Interactiva</div>
+    <h2>Simulación LPS</h2>
+    <p class="section-desc">
+      Una simulación sencilla con datos de la EPH 2025 para que cualquier
+      usuario calcule su propia línea de pobreza subjetiva.
+    </p>
+  </section>
+
+  <!-- ─── 8.1 Metodología de la actividad ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Metodología de la actividad interactiva</h2>
+    <ol style="font-size:.78em; line-height:2; color:var(--ink-light);">
+      <li class="fragment fade-up">Se consulta al usuario sus gastos en alimentos, servicios y varios → se obtiene \(y_{\min}\).</li>
+      <li class="fragment fade-up">Se multiplica \(y_{\min}\) por el ponderador poblacional \(0{,}74\) → se obtiene \(y^p_{\min}\).</li>
+      <li class="fragment fade-up">Se filtra la <strong>EPH 2025</strong> dejando IPCF (Ingreso per cápita familiar) y PONDIH.</li>
+      <li class="fragment fade-up">Se compara cada \(\mathrm{IPCF}_i\) con \(y^p_{\min}\).</li>
+      <li class="fragment fade-up">Si \(\mathrm{IPCF}_i &lt; y^p_{\min}\) → Pobre = 1; si \(\mathrm{IPCF}_i &gt; y^p_{\min}\) → Pobre = 0.</li>
+      <li class="fragment fade-up">Se calcula la <strong>tasa de pobreza nacional ponderada</strong> usando PONDIH.</li>
+    </ol>
+    <div class="formula-box fragment fade-up" style="margin-top:1em;">
+      \[\mathrm{TPNP} = \frac{\sum \mathrm{PONDIH}_i \cdot \mathrm{Pobre}_i}{\sum \mathrm{PONDIH}_i}\]
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       10 · BIBLIOGRAFÍA
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Bibliografía</h2>
+    <div class="scroll-content">
+      <ul style="font-size:.7em; line-height:2;">
+        <li>Van Praag, B. M. S. — <em>Funciones de Bienestar Individual y Comportamiento del Consumidor</em>. Leiden University, 1968.</li>
+        <li>Van Praag, B. M. S.; Kapteyn, A. — <em>Evidencia adicional sobre la función de bienestar individual del ingreso</em>. European Economic Review, 1973.</li>
+        <li>Goedhart, T.; Halberstadt, V.; Kapteyn, A.; Van Praag, B. M. S. — <em>La línea de pobreza: concepto y medición</em>. Journal of Human Resources, 1977.</li>
+        <li>Kapteyn, A. — <em>Una Teoría de la Formación de Preferencias</em>. Leiden University, 1979.</li>
+        <li>Aguado Q., L. F.; Osorio M., A. M. — <em>Percepción subjetiva de los pobres: una alternativa a la medición de la pobreza</em>. UAB Colombia, 2006.</li>
+        <li>Lucchetti, L. — <em>Caracterización de la Percepción del Bienestar y Cálculo de la LPS en Argentina</em>. CEDLAS, 2006.</li>
+        <li>Giarrizzo, V. — <em>La pobreza subjetiva en Argentina: construcción de indicadores</em>. FCE UBA, 2006.</li>
+        <li>Scalese, C. F. — <em>Pobreza Subjetiva: una primera aproximación para el caso uruguayo</em>. FCEA URU, 2021.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       11 · CIERRE
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-cover" data-transition="fade">
+    <div style="position:relative;z-index:2;">
+      <div class="cover-group">Grupo 13 · Expo Cuentas 2026</div>
+      <h1 style="font-size:3em;">Gracias</h1>
+      <div class="deco-line"></div>
+      <p style="color:rgba(255,255,255,.6); max-width:480px; font-size:.8em; line-height:1.8;">
+        Masia Insaurralde · Fernández Lancelle · Jouliá · Walter
+      </p>
+      <p style="color:rgba(255,255,255,.4); font-size:.65em; margin-top:1.5em;">
+        Pobreza: Enfoques y Métodos para su Medición y Análisis
+      </p>
+    </div>
+  </section>
+
+</div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<!-- Reveal.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1100,
+    height: 700,
+    margin: 0.04,
+    plugins: [],
+    keyboard: {
+      // Spacebar also advances
+      32: () => Reveal.next()
+    }
+  });
+
+  // Re-typeset MathJax whenever a new slide becomes visible
+  Reveal.on('slidechanged', () => {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
+  });
+  // Initial typeset
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
+  });
+</script>
+</body>
+</html>
