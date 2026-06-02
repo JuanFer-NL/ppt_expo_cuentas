@@ -363,11 +363,7 @@
           <strong>Encuesta MIQ</strong>
           <p>Prueba piloto interactiva y espacio 3D de resultados.</p>
         </div>
-        <div class="card fragment fade-up" style="margin-top:.8em;">
-          <div class="card-label">06</div>
-          <strong>Actividad Interactiva & Conclusiones</strong>
-          <p>Simulación LPS con datos EPH 2025.</p>
-        </div>
+        
       </div>
     </div>
   </section>
@@ -791,34 +787,6 @@
       Cada punto representa un hogar encuestado. Ejes: ingreso real \((y)\), ingreso mínimo declarado \((y_{\min})\)
       y tamaño familiar \((f_s)\). La intersección marca la LPS estimada.
     </p>
-  </section>
-
-  <!-- ══════════════════════════════════════════════════════
-       8 · SECCIÓN 06 — ACTIVIDAD INTERACTIVA
-  ═══════════════════════════════════════════════════════ -->
-  <section class="slide-section" data-transition="convex">
-    <div class="section-num">06 · Actividad Interactiva</div>
-    <h2>Simulación LPS</h2>
-    <p class="section-desc">
-      Una simulación sencilla con datos de la EPH 2025 para que cualquier
-      usuario calcule su propia línea de pobreza subjetiva.
-    </p>
-  </section>
-
-  <!-- ─── 8.1 Metodología de la actividad ─── -->
-  <section class="slide-light" data-transition="slide">
-    <h2>Metodología de la actividad interactiva</h2>
-    <ol style="font-size:.78em; line-height:2; color:var(--ink-light);">
-      <li class="fragment fade-up">Se consulta al usuario sus gastos en alimentos, servicios y varios → se obtiene \(y_{\min}\).</li>
-      <li class="fragment fade-up">Se multiplica \(y_{\min}\) por el ponderador poblacional \(0{,}74\) → se obtiene \(y^p_{\min}\).</li>
-      <li class="fragment fade-up">Se filtra la <strong>EPH 2025</strong> dejando IPCF (Ingreso per cápita familiar) y PONDIH.</li>
-      <li class="fragment fade-up">Se compara cada \(\mathrm{IPCF}_i\) con \(y^p_{\min}\).</li>
-      <li class="fragment fade-up">Si \(\mathrm{IPCF}_i &lt; y^p_{\min}\) → Pobre = 1; si \(\mathrm{IPCF}_i &gt; y^p_{\min}\) → Pobre = 0.</li>
-      <li class="fragment fade-up">Se calcula la <strong>tasa de pobreza nacional ponderada</strong> usando PONDIH.</li>
-    </ol>
-    <div class="formula-box fragment fade-up" style="margin-top:1em;">
-      \[\mathrm{TPNP} = \frac{\sum \mathrm{PONDIH}_i \cdot \mathrm{Pobre}_i}{\sum \mathrm{PONDIH}_i}\]
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════════════════════
