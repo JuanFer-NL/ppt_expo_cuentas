@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -336,36 +335,36 @@
   ═══════════════════════════════════════════════════════ -->
   <section class="slide-light" data-transition="slide">
     <h2>Estructura de la presentación</h2>
-    <div class="cols-2" style="margin-top:1.2em;">
-      <div>
-        <div class="card fragment fade-up">
-          <div class="card-label">01</div>
-          <strong>Introducción</strong>
-          <p>Premisa subjetiva de la pobreza y objetivos del estudio.</p>
-        </div>
-        <div class="card fragment fade-up" style="margin-top:.8em;">
-          <div class="card-label">02</div>
-          <strong>Método Objetivo — Línea de Pobreza</strong>
-          <p>CBA, Adulto Equivalente, LP e indigencia.</p>
-        </div>
-        <div class="card fragment fade-up" style="margin-top:.8em;">
-          <div class="card-label">03</div>
-          <strong>Método Subjetivo — Concepto</strong>
-          <p>Autopercepción, componente relativo y escuela de Leyden.</p>
-        </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto auto; gap:.8em 2em; margin-top:1.2em;">
+      <div class="card fragment fade-up">
+        <div class="card-label">01</div>
+        <strong>Introducción</strong>
+        <p>Premisa subjetiva de la pobreza y objetivos del estudio.</p>
       </div>
-      <div>
-        <div class="card fragment fade-up">
-          <div class="card-label">04</div>
-          <strong>Metodología LPS</strong>
-          <p>Regresión MCO, parámetros y umbral de pobreza subjetiva.</p>
-        </div>
-        <div class="card fragment fade-up" style="margin-top:.8em;">
-          <div class="card-label">05</div>
-          <strong>Encuesta MIQ</strong>
-          <p>Prueba piloto interactiva y espacio 3D de resultados.</p>
-        </div>
-        
+      <div class="card fragment fade-up">
+        <div class="card-label">04</div>
+        <strong>Metodología LPS</strong>
+        <p>Regresión MCO, parámetros y umbral de pobreza subjetiva.</p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">02</div>
+        <strong>Método Objetivo — Línea de Pobreza</strong>
+        <p>CBA, Adulto Equivalente, LP e indigencia.</p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">05</div>
+        <strong>Encuesta MIQ</strong>
+        <p>Prueba piloto interactiva y espacio 3D de resultados.</p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">03</div>
+        <strong>Método Subjetivo — Concepto</strong>
+        <p>Autopercepción, componente relativo y escuela de Leyden.</p>
+      </div>
+      <div class="card fragment fade-up">
+        <div class="card-label">06</div>
+        <strong>Conclusiones</strong>
+        <p>Contraste LP oficial vs. LPS por tamaño familiar y hallazgos clave.</p>
       </div>
     </div>
   </section>
@@ -774,7 +773,44 @@
     </div>
   </section>
 
-  <!-- ─── 7.2 ESPACIO 3D (iframe espacio3d.html) ─── -->
+  <!-- ─── 7.2 GRÁFICO GENERAL — Modelo de Leyden ─── -->
+  <section class="slide-light" data-transition="slide">
+    <h2>Resultados — Estimación General</h2>
+    <div class="cols-2" style="margin-top:.8em; align-items:center;">
+      <div>
+        <p>La regresión MCO sobre los datos de la encuesta MIQ arroja los siguientes parámetros:</p>
+        <div class="card fragment fade-up" style="margin-top:.8em;">
+          <div class="card-label">Parámetros del modelo</div>
+          <ul style="font-size:.78em; line-height:2;">
+            <li><strong>α₀ (Alfa 0):</strong> 8.134</li>
+            <li><strong>α₁ (Alfa 1 / preference drift):</strong> 0.4375</li>
+          </ul>
+        </div>
+        <div class="card fragment fade-up" style="margin-top:.8em;">
+          <div class="card-label">Umbral estimado</div>
+          <ul style="font-size:.78em; line-height:2;">
+            <li><strong>Línea de Pobreza Subjetiva (Z*):</strong> $1.903.334</li>
+            <li><strong>Tasa de pobreza:</strong> 49,2 %</li>
+          </ul>
+        </div>
+        <p class="fragment fade-up" style="font-size:.68em; margin-top:.8em; border-left:3px solid var(--accent); padding-left:.8em; color:var(--ink-light);">
+          El punto negro ◆ marca la intersección \(y = y_{\min}\), donde se estima la LPS.
+        </p>
+      </div>
+      <div class="fragment fade-up" style="display:flex; flex-direction:column; align-items:center;">
+        <img
+          src="graficogeneral1.png"
+          alt="Gráfico — Modelo de Leyden · Estimación General"
+          style="max-width:100%; max-height:380px; object-fit:contain; border-radius:6px; box-shadow:0 4px 24px rgba(0,0,0,.12);"
+        />
+        <p style="font-size:.55em; color:var(--ink-light); margin-top:.5em; text-align:center;">
+          Gráfico 2 — Modelo de Leyden · Estimación General · Fuente: elaboración propia
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 7.3 ESPACIO 3D (iframe espacio3d.html) ─── -->
   <section class="slide-light" data-transition="zoom" data-background="#F4EFE8">
     <div style="margin-bottom:.5em;">
       <div class="iframe-label">Visualización interactiva · Resultados de la encuesta MIQ</div>
@@ -791,6 +827,62 @@
       Cada punto representa un hogar encuestado. Ejes: ingreso real \((y)\), ingreso mínimo declarado \((y_{\min})\)
       y tamaño familiar \((f_s)\). La intersección marca la LPS estimada.
     </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CONCLUSIONES
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-dark" data-transition="slide">
+    <h2>Conclusiones</h2>
+    <p style="font-size:.75em; color:rgba(255,255,255,.6); margin:.4em 0 .7em;">
+      El gráfico compara, por tamaño familiar, la <strong style="color:#fff;">Línea de Pobreza</strong>
+      (INDEC - Método Objetivo) contra la <strong style="color:#fff;">Línea de Pobreza Subjetiva</strong>
+      estimada mediante MCO con microdatos de la EPH.
+    </p>
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <img
+        src="barrascuenta.png"
+        alt="Contraste de Necesidades Mensuales por Tamaño de Hogar"
+        style="max-width:100%; max-height:460px; object-fit:contain; border-radius:6px; box-shadow:0 4px 28px rgba(0,0,0,.4);"
+      />
+      <p style="font-size:.52em; color:rgba(255,255,255,.4); margin:0 0 0; text-align:center;">
+        Gráfico 3 — LP INDEC vs. LPS (Elaboración propia con microdatos EPH)
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       ¿QUÉ SIGNIFICA ESTO?
+  ═══════════════════════════════════════════════════════ -->
+  <section class="slide-dark" data-transition="slide">
+    <h2>¿Qué significa esto?</h2>
+    <div class="cols-3" style="margin-top:1.2em;">
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Brecha sistemática</div>
+        <p>La LPS supera a la LP oficial en <em>todos</em> los tamaños familiares,
+        con brechas del <strong style="color:#E67E22;">+46,1 %</strong> (6 integrantes)
+        al <strong style="color:#E67E22;">+211,7 %</strong> (hogar unipersonal).
+        La medición oficial subestima de forma consistente lo que los hogares perciben
+        como mínimo de subsistencia.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Desconsideración de las economías de escala</div>
+        <p>En la LP oficial, el ingreso mínimo marginal por integrante adicional es
+        casi constante — cada persona suma la misma
+        cantidad a la canasta. La LPS, en cambio, refleja que ese costo
+        <em>decrece</em> a medida que crece el hogar: los bienes compartidos
+        (alquiler, servicios) se dividen entre más miembros, reduciendo la necesidad
+        per cápita.</p>
+      </div>
+      <div class="card-dark fragment fade-up">
+        <div class="card-label">Implicancias para la política pública</div>
+        <p>Usar únicamente la LP oficial para focalizar transferencias o programas
+        sociales implica <strong style="color:#fff;">dejar fuera</strong> a un
+        conjunto de hogares que —según su propia percepción— no logran cubrir
+        sus necesidades básicas. La LPS ofrece un umbral complementario que
+        incorpora las preferencias reales de la población.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ══════════════════════════════════════════════════════
