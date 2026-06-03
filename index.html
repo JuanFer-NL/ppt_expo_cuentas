@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,6 +9,7 @@
   <!-- Reveal.js CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" id="theme" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -293,7 +295,7 @@
       right: 1.5em;
       bottom: 1em;
     }
-    .slide-dark .reveal .slide-number { color: rgba(255,255,255,.3); }
+    /* .slide-dark slide-number: handled via Reveal slidechanged event */
 
     /* ─── SCROLLABLE CONTENT ─────────────────────────────── */
     .scroll-content {
@@ -479,7 +481,7 @@
     </p>
   </section>
 
-  <!-- ══���═══════════════════════════════════════════════════
+  <!-- ═════════════════════════════════════════════════════════
        5 · SECCIÓN 03 — MÉTODO SUBJETIVO
   ═══════════════════════════════════════════════════════ -->
   <section class="slide-section" data-transition="convex">
@@ -853,11 +855,8 @@
     width: 1100,
     height: 700,
     margin: 0.04,
-    plugins: [],
-    keyboard: {
-      // Spacebar also advances
-      32: () => Reveal.next()
-    }
+    plugins: []
+    // Note: spacebar already advances slides by default in Reveal.js
   });
 
   // Re-typeset MathJax whenever a new slide becomes visible
@@ -866,8 +865,9 @@
       MathJax.typesetPromise();
     }
   });
-  // Initial typeset
-  document.addEventListener('DOMContentLoaded', () => {
+  // Initial typeset after Reveal is fully ready (replaces DOMContentLoaded,
+  // which fires before Reveal renders slides and would miss math elements)
+  Reveal.on('ready', () => {
     if (window.MathJax && MathJax.typesetPromise) {
       MathJax.typesetPromise();
     }
