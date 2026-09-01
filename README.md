@@ -1,5 +1,11 @@
 # Pobreza — Enfoques y Métodos
 
+[![Tests](https://github.com/JuanFer-NL/ppt_expo_cuentas/actions/workflows/test.yml/badge.svg)](https://github.com/JuanFer-NL/ppt_expo_cuentas/actions/workflows/test.yml)
+[![Spellcheck](https://github.com/JuanFer-NL/ppt_expo_cuentas/actions/workflows/spellcheck.yml/badge.svg)](https://github.com/JuanFer-NL/ppt_expo_cuentas/actions/workflows/spellcheck.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-2ea44f?logo=githubpages&logoColor=white)](https://juanfer-nl.github.io/ppt_expo_cuentas/)
+[![License: MIT](https://img.shields.io/badge/framework-MIT-blue.svg)](LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/contenido-CC%20BY%204.0-lightgrey.svg)](LICENSE-CONTENT)
+
 Presentación del **Grupo 13** para **Expo Cuentas 2026**, sobre los enfoques objetivo y subjetivo de medición de la pobreza.
 
 🔗 **Ver la presentación en vivo:** https://juanfer-nl.github.io/ppt_expo_cuentas/
@@ -86,4 +92,7 @@ dist/, build/            ← artefactos de build (generados, no versionar cambio
 
 ## Licencia
 
-El contenido de la presentación (`index.html`, `espacio3d.html`, imágenes) pertenece al Grupo 13. El framework reveal.js está licenciado bajo MIT — ver [LICENSE](LICENSE).
+Licenciamiento dual:
+
+- El **contenido propio del grupo** (`index.html`, `espacio3d.html`, `barrascuenta.png`, `graficogeneral1.png`, `Figure_1.png`) está licenciado bajo **CC BY 4.0** — ver [LICENSE-CONTENT](LICENSE-CONTENT).
+- El **framework reveal.js** (todo lo demás: `js/`, `css/`, `plugin/`, `react/`, etc.) está licenciado bajo **MIT** — ver [LICENSE](LICENSE).
