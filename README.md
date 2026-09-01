@@ -1,32 +1,38 @@
-<p align="center">
-  <a href="https://revealjs.com">
-  <img src="https://hakim-static.s3.amazonaws.com/reveal-js/logo/v1/reveal-black-text-sticker.png" alt="reveal.js" width="500">
-  </a>
-  <br><br>
-  <a href="https://github.com/hakimel/reveal.js/actions"><img src="https://github.com/hakimel/reveal.js/workflows/tests/badge.svg"></a>
-  <a href="https://slides.com/"><img src="https://static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
-</p>
+# Pobreza — Enfoques y Métodos
 
-reveal.js is an open source HTML presentation framework. It enables anyone with a web browser to create beautiful presentations for free. Check out the live demo at [revealjs.com](https://revealjs.com/).
+Presentación del Grupo 13 para **Expo Cuentas 2026**, sobre los enfoques objetivo y subjetivo de medición de la pobreza.
 
-The framework comes with a powerful feature set including [nested slides](https://revealjs.com/vertical-slides/), [Markdown support](https://revealjs.com/markdown/), [Auto-Animate](https://revealjs.com/auto-animate/), [PDF export](https://revealjs.com/pdf-export/), [speaker notes](https://revealjs.com/speaker-view/), [LaTeX typesetting](https://revealjs.com/math/), [syntax highlighted code](https://revealjs.com/code/) and an [extensive API](https://revealjs.com/api/).
+🔗 **Ver la presentación en vivo:** https://juanfer-nl.github.io/ppt_expo_cuentas/
 
----
+## Contenido
 
-Want to create reveal.js presentation in a graphical editor? Try <https://slides.com>. It's made by the same people behind reveal.js.
+La presentación recorre:
 
----
+- ¿Qué es la pobreza? Premisa del estudio.
+- **Método objetivo:** Línea de Pobreza, Canasta Básica Alimentaria y sus limitaciones.
+- **Método subjetivo:** origen en la Escuela de Leyden, métodos de medición y casos aplicados en Latinoamérica.
+- Construcción de la línea de pobreza subjetiva: la Pregunta de Ingreso Mínimo (MIQ), el sesgo de ingresos y la regresión lineal multivariable (MCO) para hallar el umbral de pobreza subjetiva.
+- Comparación de pros y contras entre ambos métodos.
+- Prueba piloto: diseño de encuesta MIQ y resultados, incluyendo una visualización 3D de la distribución de respuestas (`espacio3d.html`).
+- Conclusiones y bibliografía.
 
-### Getting started
+## Tecnología
 
-- 🚀 [Install reveal.js](https://revealjs.com/installation)
-- 👀 [View the demo presentation](https://revealjs.com/demo)
-- 📖 [Read the documentation](https://revealjs.com/markup/)
-- 🖌 [Try the visual editor for reveal.js at Slides.com](https://slides.com/)
-- 🎬 [Watch the reveal.js video course (paid)](https://revealjs.com/course)
+Construida sobre [reveal.js](https://revealjs.com), el framework de presentaciones HTML de código abierto.
 
----
+- `index.html` — presentación principal.
+- `demo.html` — demo de referencia de reveal.js (no forma parte del contenido expuesto).
+- `espacio3d.html` — visualización 3D interactiva de resultados de la encuesta.
+- `plugin/`, `css/`, `js/` — código fuente del framework reveal.js.
 
-<div align="center">
-  MIT licensed | Copyright © 2011-2026 Hakim El Hattab, https://hakim.se
-</div>
+## Uso local
+
+```bash
+npm install
+npm run dev      # levanta un servidor de desarrollo
+npm run build    # genera la build de producción en dist/
+```
+
+## Licencia
+
+El contenido de la presentación pertenece al Grupo 13. El framework reveal.js está licenciado bajo MIT — ver [LICENSE](LICENSE).
